@@ -54,9 +54,9 @@ class PostController extends Controller
 
         $data = $request->all();
         $post = new Post();
-        $data['slug'] = Str::slug($request->title, '-'); //vedi alternativa dopo fill
+        $data['slug'] = Str::slug($request->title, '-'); //°vedi alternativa dopo fill
         $post->fill($data);
-        // $post->slug = Str::slug($post->title, '-'); e poi levo slug dalla $fillable di Model Post
+        //° $post->slug = Str::slug($post->title, '-'); e poi levo slug dalla $fillable di Model Post
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('message', "Post creato con successo")->with('type', 'success');
