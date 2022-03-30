@@ -31,12 +31,17 @@
       <div class="col-4">
         <div class="form-group">
           <label for="category">Categoria</label>
-          <select class="form-control" id="category" name="category_id">
-            <option value="">--</option>
+          <select class="form-control @error('category_id') is-invalid @enderror" id="category" name="category_id">
+            <option value="">Nessuna categoria</option>
             @foreach($categories as $category)
-            <option @if(old('category_id')==$category->id) selected @endif value="{{$category->id}}">{{$category->label}}</option>
+            <option @if(old('category_id', $post->category_id)==$category->id) selected @endif value="{{$category->id}}">{{$category->label}}</option>
             @endforeach
           </select>
+          @error('category_id')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
         </div>
       </div>
 

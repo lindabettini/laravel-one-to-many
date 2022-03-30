@@ -53,7 +53,7 @@ class PostController extends Controller
             'title.unique' => "Esiste gia' un post dal titolo ''$request->title''.",
             'content.required' => 'Scrivi qualcosa nel post.',
             'image.url' => 'Url immagine non valido.',
-            'category_id' => 'Categoria non valida.'
+            'category_id.exists' => 'Categoria non valida.'
         ]);
 
         $data = $request->all();
@@ -85,7 +85,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -110,7 +111,7 @@ class PostController extends Controller
             'title.unique' => "Esiste gia' un post dal titolo ''$request->title''.",
             'content.required' => 'Scrivi qualcosa nel post.',
             'image.url' => 'Url immagine non valido.',
-            'category_id' => 'Categoria non valida.'
+            'category_id.exists' => 'Categoria non valida.'
         ]);
 
         $data = $request->all();
