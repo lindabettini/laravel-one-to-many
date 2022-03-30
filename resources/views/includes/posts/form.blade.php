@@ -16,7 +16,7 @@
     @endif
     @csrf
     <div class="row">
-      <div class="col-12">
+      <div class="col-8">
         <div class="form-group">
           <label for="title" class="form-label">Titolo Post:</label>
           <input type="text" name="title" id="title" placeholder="Titolo" value="{{old('title', $post->title)}}" class="form-control @error('title') is-invalid @enderror">
@@ -27,6 +27,19 @@
           @enderror
         </div>
       </div>
+
+      <div class="col-4">
+        <div class="form-group">
+          <label for="category">Categoria</label>
+          <select class="form-control" id="category" name="category_id">
+            <option value="">--</option>
+            @foreach($categories as $category)
+            <option value="{{$category->id}}">{{$category->label}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+
       <div class="col-12">
         <div class="form-group">
           <label for="content" class="form-label">Scrivi Post:</label>
