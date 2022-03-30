@@ -44,21 +44,23 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|min:5|max:50',
             'content' => 'required|string',
-            'image' => 'url'
+            'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id' //<Controllo che esista dentro la tab. Categories nella colonna dell'id
         ], [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'La lunghezza minima del titolo è di 5 caratteri.',
             'title.max' => 'La lunghezza massima del titolo è di 50 caratteri.',
             'title.unique' => "Esiste gia' un post dal titolo ''$request->title''.",
             'content.required' => 'Scrivi qualcosa nel post.',
-            'image.url' => 'Url immagine non valido.'
+            'image.url' => 'Url immagine non valido.',
+            'category_id' => 'Categoria non valida.'
         ]);
 
         $data = $request->all();
         $post = new Post();
-        $data['slug'] = Str::slug($request->title, '-'); //°vedi alternativa dopo fill
+        $data['slug'] = Str::slug($request->title, '-'); //<vedi alternativa dopo fill
         $post->fill($data);
-        //° $post->slug = Str::slug($post->title, '-'); e poi levo slug dalla $fillable di Model Post
+        //< $post->slug = Str::slug($post->title, '-'); e poi levo slug dalla $fillable di Model Post
         $post->save();
 
         return redirect()->route('admin.posts.index')->with('message', "Post creato con successo")->with('type', 'success');
@@ -98,14 +100,17 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|min:5|max:50',
             'content' => 'required|string',
-            'image' => 'url'
+            'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id' //<Controllo che esista dentro la tab. Categories nella colonna dell'id
+
         ], [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'La lunghezza minima del titolo è di 5 caratteri.',
             'title.max' => 'La lunghezza massima del titolo è di 50 caratteri.',
             'title.unique' => "Esiste gia' un post dal titolo ''$request->title''.",
             'content.required' => 'Scrivi qualcosa nel post.',
-            'image.url' => 'Url immagine non valido.'
+            'image.url' => 'Url immagine non valido.',
+            'category_id' => 'Categoria non valida.'
         ]);
 
         $data = $request->all();
