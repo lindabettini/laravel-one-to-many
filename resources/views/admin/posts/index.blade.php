@@ -7,7 +7,7 @@
 </header>
 <br>
 
-<!-- MESSAGE ALERT  -->
+<!-- ALERT MESSAGE  -->
 @if(session('message'))
 <div class="alert alert-{{session('type') ?? 'info' }}">{{session('message')}}</div>
 @endif
@@ -16,18 +16,17 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
-      <th scope="col">Slug</th>
+      <th scope="col">Categoria</th>
       <th scope="col">Creato il</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-
     @forelse($posts as $post)
     <tr>
       <th scope="row">{{ $post->id }}</th>
       <td>{{ $post->title }}</td>
-      <td>{{ $post->slug }}</td>
+      <td><span class="badge rounded-pill bg-{{$post->category->color}}">{{ $post->category->label  }}</span></td>
       <td>{{$post->created_at}}</td>
       <td class="d-flex justify-content-end align-items-start">
         <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary mr-2"><i class="fa-solid fa-eye mr-2"></i>Vedi</a>
