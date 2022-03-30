@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-8">
         <div class="form-group">
-          <label for="title" class="form-label">Titolo Post:</label>
+          <label for="title" class="form-label">Titolo</label>
           <input type="text" name="title" id="title" placeholder="Titolo" value="{{old('title', $post->title)}}" class="form-control @error('title') is-invalid @enderror">
           @error('title')
           <div class="invalid-feedback">
@@ -34,7 +34,7 @@
           <select class="form-control" id="category" name="category_id">
             <option value="">--</option>
             @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->label}}</option>
+            <option @if(old('category_id')==$category->id) selected @endif value="{{$category->id}}">{{$category->label}}</option>
             @endforeach
           </select>
         </div>
@@ -42,7 +42,7 @@
 
       <div class="col-12">
         <div class="form-group">
-          <label for="content" class="form-label">Scrivi Post:</label>
+          <label for="content" class="form-label">Testo</label>
           <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" rows="10">{{old('content', $post->content)}}</textarea>
         </div>
         @error('image')
