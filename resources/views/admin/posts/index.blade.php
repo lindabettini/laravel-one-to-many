@@ -26,7 +26,7 @@
     <tr>
       <th scope="row">{{ $post->id }}</th>
       <td>{{ $post->title }}</td>
-      <td><span class="badge rounded-pill bg-{{$post->category->color}}">{{ $post->category->label  }}</span></td>
+      <td><span class="badge rounded-pill @if($post->category) bg-{{$post->category->color}} @endif">@if($post->category){{ $post->category->label }} @endif</span></td>
       <td>{{$post->created_at}}</td>
       <td class="d-flex justify-content-end align-items-start">
         <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary mr-2"><i class="fa-solid fa-eye mr-2"></i>Vedi</a>
