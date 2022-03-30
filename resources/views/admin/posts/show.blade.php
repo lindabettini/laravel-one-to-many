@@ -1,7 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>{{ $post->title}}</h1>
+<header class="container">
+
+  <div class="h1">{{ $post->title}}</div>
+  <div>
+    @if($post->category)
+    <span class="badge rounded-pill @if($post->category) bg-{{$post->category->color}} @endif">@if($post->category){{ $post->category->label }}@endif</span>
+    @endif
+  </div>
+
+
+</header>
+
 <div class="clearfix">
   @if($post->image)
   <img src="{{$post->image}}" alt="{{ $post->slug }}" class="float-left mr-2">
