@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //< ORDINE IMPORTANTE QUANDO HO RELAZIONI TRA LE CLASSI: 
+        //< PRIMA LE ENTITA' FORTI E DOPO LE DEBOLI
         $this->call([CategorySeeder::class, UserSeeder::class, PostSeeder::class]);
     }
 }
